@@ -1,0 +1,32 @@
+version: "3.5"
+
+services:
+  nosql:
+    image: "mongo"
+    environment:
+      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    volumes:
+      - mongo:/data/db
+  listener:
+    build:
+      context: .
+      dockerfile: .docker/listener/Dockerfile
+    environment:
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_HOST=${MONGO_HOST}
+      - MONGO_DATABASE=${MONGO_DATABASE}
+      - MONGO_URL=${MONGO_URL}
+    ports:
+      - "80:80"
+  front:
+    build:
+      context: .
+      dockerfile: .docker/front/Dockerfile
+    ports:
+      - "8080:80"
+
+volumes:
+  mongo:

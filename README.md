@@ -3,6 +3,11 @@ To monitor and debug responses, such as webhooks from a mail service, a gateway 
 
 The gateway serves to intercept and read responses locally, allowing developers to inspect them for debugging purposes. Once intercepted, these responses can be forwarded, for example, through Postman for further analysis or testing.
 
+## Usage
+
+Send any request to 'localhost/listen' to catch request and see what it contains. To see what requests were caught 
+go to `licahost:8080` to see UI for this listener.
+
 ## Tech Stack
 * GO for handling HTTP requests
 * MongoDB for storing information
